@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Inchiriere Autobuze</a>
+        <div class="d-flex align-items-center">
+            <!-- Mesaj de Bun Venit -->
+            <span class="me-3">Bine ai venit, <strong th:text="${username}"></strong>!</span>
+
+            <!-- Buton de Logout -->
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

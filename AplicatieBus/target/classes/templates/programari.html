@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Programări</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Lista Programări</h1>
+    <table class="table table-bordered table-striped mt-3">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nume</th>
+            <th>Prenume</th>
+            <th>Telefon</th>
+            <th>Început</th>
+            <th>Sfârșit</th>
+            <th>Descriere</th>
+            <th>Kilometri</th>
+            <th>ID Vehicul</th>
+            <th>ID User</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="programare : ${programari}">
+            <td th:text="${programare.idProgramare}"></td>
+            <td th:text="${programare.nume}"></td>
+            <td th:text="${programare.prenume}"></td>
+            <td th:text="${programare.telefon}"></td>
+            <td th:text="${programare.inceput}"></td>
+            <td th:text="${programare.sfarsit}"></td>
+            <td th:text="${programare.descriere}"></td>
+            <td th:text="${programare.kilometri}"></td>
+            <td th:text="${programare.idVehicul}"></td>
+            <td th:text="${programare.idUser}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

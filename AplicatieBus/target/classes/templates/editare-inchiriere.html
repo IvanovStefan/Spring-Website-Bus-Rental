@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editare Programare</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Include Navbar -->
+<div th:replace="extra/navbar :: navbar"></div>
+
+<div class="container mt-5">
+    <h1 class="text-center">Editare Programare</h1>
+
+    <div th:if="${errorMessage}" class="alert alert-danger mt-4" role="alert">
+        <span th:text="${errorMessage}"></span>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <!-- Informații despre data și vehicul -->
+            <p><strong>Data Începere:</strong> <span th:text="${programare.inceput}"></span></p>
+            <p><strong>Data Sfârșit:</strong> <span th:text="${programare.sfarsit}"></span></p>
+            <p>
+                <strong>Vehicul:</strong>
+                <span th:text="${vehicul.marca}"></span>
+                <span th:text="${vehicul.model}"></span> -
+                <span th:text="${vehicul.nrInmatriculare}"></span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Formular pentru editare -->
+    <form th:action="@{'/editareinchiriere/' + ${programare.idProgramare}}" method="post" class="mt-4">
+        <div class="mb-3">
+            <label for="nume" class="form-label">Nume</label>
+            <input type="text" id="nume" name="nume" class="form-control" th:value="${programare.nume}" required>
+        </div>
+        <div class="mb-3">
+            <label for="prenume" class="form-label">Prenume</label>
+            <input type="text" id="prenume" name="prenume" class="form-control" th:value="${programare.prenume}" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefon" class="form-label">Telefon</label>
+            <input type="tel" id="telefon" name="telefon" class="form-control" th:value="${programare.telefon}" required>
+        </div>
+        <div class="mb-3">
+            <label for="descriere" class="form-label">Descriere</label>
+            <textarea id="descriere" name="descriere" class="form-control" rows="3" th:text="${programare.descriere}"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="kilometri" class="form-label">Kilometri</label>
+            <input type="number" id="kilometri" name="kilometri" class="form-control" th:value="${programare.kilometri}" required>
+        </div>
+        <button type="submit" class="btn btn-success">Modifică</button>
+        <a th:href="@{/calendar}" class="btn btn-secondary">Anulează</a>
+    </form>
+</div>
+</body>
+</html>

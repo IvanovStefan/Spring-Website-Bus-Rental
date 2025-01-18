@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inchiriere Autobuze</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .btn-large {
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Include Navbar -->
+<div th:replace="extra/navbar :: navbar"></div>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Bine ai venit la Inchiriere Autobuze!</h1>
+
+    <!-- Secțiunea Principală -->
+    <div class="d-flex justify-content-center flex-wrap gap-4 mb-5">
+        <!-- Buton pentru Redirecționare către Pagina Calendar -->
+        <a th:href="@{/calendar}" class="btn btn-success btn-large">Calendar</a>
+
+        <!-- Buton pentru Redirecționare către Pagina Închiriere -->
+        <a th:href="@{/inchiriere}" class="btn btn-warning btn-large">Închiriere</a>
+    </div>
+
+    <!-- Secțiunea Vehicule -->
+    <div class="mt-5">
+        <h2 class="text-center mb-4">Gestionare Vehicule</h2>
+        <div class="d-flex justify-content-center flex-wrap gap-4">
+            <!-- Buton pentru Redirecționare către Pagina Vehicule -->
+            <a th:href="@{/vehicule}" class="btn btn-primary btn-large">Vezi Vehicule</a>
+
+            <!-- Buton pentru Redirecționare către Pagina Adăugare Vehicul -->
+            <a th:href="@{/adaugarevehicul}" class="btn btn-dark btn-large">Adăugare Vehicul</a>
+
+            <!-- Buton pentru Redirecționare către Pagina Editare Vehicul -->
+            <a th:href="@{/editarevehicul}" class="btn btn-info btn-large">Editare Vehicul</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

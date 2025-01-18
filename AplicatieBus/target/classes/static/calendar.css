@@ -1,0 +1,85 @@
+#calendar {
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Stiluri pentru header-ul calendarului */
+.fc-toolbar {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.fc-toolbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.fc-button {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.fc-button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Stiluri pentru zile */
+.fc-daygrid-day {
+    min-height: 150px; /* Înălțime minimă pentru fiecare zi */
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.fc-daygrid-day-number {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #007bff;
+}
+
+.fc-day-today {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Stiluri pentru evenimente */
+.fc-event {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    padding: 3px 6px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.fc-event:hover {
+    background-color: #218838;
+}
+
+/* Stiluri pentru weekend-uri */
+.fc-day-sat,
+.fc-day-sun {
+    background-color: rgba(240, 240, 240, 0.5);
+}
+
+.fc-daygrid-day-events {
+    max-height: none; /* Elimină limita de înălțime */
+    overflow: visible; /* Asigură afișarea completă a evenimentelor */
+}

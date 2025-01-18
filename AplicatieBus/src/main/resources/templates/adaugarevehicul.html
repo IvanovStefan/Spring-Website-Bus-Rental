@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adăugare Vehicul</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Include Navbar -->
+<div th:replace="extra/navbar :: navbar"></div>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Adăugare Vehicul</h1>
+
+    <!-- Mesaj de eroare -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <span th:text="${errorMessage}"></span>
+    </div>
+
+    <form th:action="@{/adaugarevehicul}" method="post" class="needs-validation" novalidate id="adaugareVehiculForm">
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marcă</label>
+            <input type="text" class="form-control" id="marca" name="marca" required>
+        </div>
+        <div class="mb-3">
+            <label for="model" class="form-label">Model</label>
+            <input type="text" class="form-control" id="model" name="model" required>
+        </div>
+        <div class="mb-3">
+            <label for="nrLocuri" class="form-label">Număr Locuri</label>
+            <input type="number" class="form-control" id="nrLocuri" name="nrLocuri" required>
+        </div>
+        <div class="mb-3">
+            <label for="categorie" class="form-label">Categorie</label>
+            <select class="form-select" id="categorie" name="categorie" required>
+                <option value="" disabled selected>Alege categoria</option>
+                <option value="1">Categorie 1</option>
+                <option value="2">Categorie 2</option>
+                <option value="3">Categorie 3</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="tip" class="form-label">Tip</label>
+            <input type="text" class="form-control" id="tip" name="tip" required>
+        </div>
+        <div class="mb-3">
+            <label for="descriere" class="form-label">Descriere</label>
+            <textarea class="form-control" id="descriere" name="descriere" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="nrInmatriculare" class="form-label">Număr Înmatriculare</label>
+            <input type="text" class="form-control" id="nrInmatriculare" name="nrInmatriculare" maxlength="7" required>
+        </div>
+        <button type="submit" class="btn btn-success">Adaugă Vehicul</button>
+        <a th:href="@{/}" class="btn btn-secondary">Anulează</a>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('adaugareVehiculForm');
+        const inputs = Array.from(form.querySelectorAll('input, select, textarea'));
+
+        form.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const currentIndex = inputs.indexOf(event.target);
+                if (currentIndex !== -1 && currentIndex < inputs.length - 1) {
+                    // Mută focusul la următorul câmp
+                    inputs[currentIndex + 1].focus();
+                } else {
+                    // Dacă este ultimul câmp, trimite formularul
+                    form.submit();
+                }
+            }
+        });
+
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                alert("Toate câmpurile sunt obligatorii și trebuie completate corect!");
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+</script>
+
+</body>
+</html>

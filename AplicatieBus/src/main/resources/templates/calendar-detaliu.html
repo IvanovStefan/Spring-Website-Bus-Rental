@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalii Programare</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Include Navbar -->
+<div th:replace="extra/navbar :: navbar"></div>
+
+<div class="container mt-5">
+    <h1 class="text-center">Detalii Programare</h1>
+    <div class="card mt-4">
+        <div class="card-header">
+            Programare #<span th:text="${programare.idProgramare}"></span>
+        </div>
+        <div class="card-body">
+            <p><strong>Nume:</strong> <span th:text="${programare.nume}"></span></p>
+            <p><strong>Prenume:</strong> <span th:text="${programare.prenume}"></span></p>
+            <p><strong>Telefon:</strong> <span th:text="${programare.telefon}"></span></p>
+            <p><strong>Descriere:</strong> <span th:text="${programare.descriere}"></span></p>
+            <p><strong>Data Început:</strong> <span th:text="${programare.inceput}"></span></p>
+            <p><strong>Data Sfârșit:</strong> <span th:text="${programare.sfarsit}"></span></p>
+            <p><strong>Kilometri:</strong> <span th:text="${programare.kilometri}"></span></p>
+            <p>
+                <strong>Vehicul:</strong>
+                <span th:text="${vehicul.marca}"></span>
+                <span th:text="${vehicul.model}"></span> -
+                <span th:text="${vehicul.nrInmatriculare}"></span>
+            </p>
+            <p>
+                <strong>Utilizator:</strong>
+                <span th:text="${user.username}"></span>
+            </p>
+            <!-- Buton Editare -->
+            <div th:if="${loggedInUsername == user.username}">
+                <a th:href="@{'/editareinchiriere/' + ${programare.idProgramare}}" class="btn btn-warning">Editare</a>
+                <form th:action="@{'/stergereprogramare/' + ${programare.idProgramare}}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Ești sigur că vrei să ștergi această programare?');">
+                        Ștergere
+                    </button>
+                </form>
+            </div>
+            <p th:if="${loggedInUsername != user.username}" class="text-danger">Nu ai acces la editarea acestei programări!</p>
+
+        </div>
+        <div class="card-footer">
+            <a th:href="@{/calendar}" class="btn btn-secondary">Înapoi la Calendar</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

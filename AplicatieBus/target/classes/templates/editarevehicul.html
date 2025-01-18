@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editare Vehicul</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Include Navbar -->
+<div th:replace="extra/navbar :: navbar"></div>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Editare Vehicul</h1>
+
+    <!-- Selectare Vehicul -->
+    <form id="selectVehiculForm" method="post" th:action="@{/editarevehicul/select}">
+        <div class="mb-3">
+            <label for="vehiculSelect" class="form-label">Alege Vehiculul</label>
+            <select class="form-select" id="vehiculSelect" name="vehiculId" required>
+                <option value="" disabled selected>Alege un vehicul</option>
+                <option th:each="vehicul : ${vehiculeDisponibile}"
+                        th:value="${vehicul.idVehicul}"
+                        th:text="${vehicul.marca + ' ' + vehicul.model + ' - ' + vehicul.nrInmatriculare}">
+                </option>
+            </select>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Editare</button>
+            <button type="button" id="deleteVehiculButton" class="btn btn-danger" onclick="stergeVehicul()">Ștergere</button>
+        </div>
+    </form>
+
+    <!-- Formular Editare -->
+    <form id="editVehiculForm" th:if="${vehicul != null}" method="post" th:action="@{/editarevehicul/save}" class="mt-4">
+        <input type="hidden" name="idVehicul" th:value="${vehicul.idVehicul}">
+
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marcă</label>
+            <input type="text" class="form-control" id="marca" name="marca" th:value="${vehicul.marca}" required>
+        </div>
+        <div class="mb-3">
+            <label for="model" class="form-label">Model</label>
+            <input type="text" class="form-control" id="model" name="model" th:value="${vehicul.model}" required>
+        </div>
+        <div class="mb-3">
+            <label for="nrLocuri" class="form-label">Număr Locuri</label>
+            <input type="number" class="form-control" id="nrLocuri" name="nrLocuri" th:value="${vehicul.nrLocuri}" required>
+        </div>
+        <div class="mb-3">
+            <label for="categorie" class="form-label">Categorie</label>
+            <input type="text" class="form-control" id="categorie" name="categorie" th:value="${vehicul.categorie}" required>
+        </div>
+        <div class="mb-3">
+            <label for="tip" class="form-label">Tip</label>
+            <input type="text" class="form-control" id="tip" name="tip" th:value="${vehicul.tip}" required>
+        </div>
+        <div class="mb-3">
+            <label for="descriere" class="form-label">Descriere</label>
+            <textarea class="form-control" id="descriere" name="descriere" rows="3" th:text="${vehicul.descriere}" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="nrInmatriculare" class="form-label">Număr Înmatriculare</label>
+            <input type="text" class="form-control" id="nrInmatriculare" name="nrInmatriculare" th:value="${vehicul.nrInmatriculare}" required>
+        </div>
+        <button type="submit" class="btn btn-success">Confirmă</button>
+    </form>
+</div>
+
+<script>
+    function stergeVehicul() {
+        const vehiculId = document.getElementById("vehiculSelect").value;
+        if (vehiculId && confirm("Ești sigur că vrei să ștergi acest vehicul?")) {
+            fetch(`/editarevehicul/delete/${vehiculId}`, { method: "DELETE" })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Vehiculul a fost șters cu succes!");
+                        location.reload();
+                    } else {
+                        alert("A apărut o eroare la ștergerea vehiculului.");
+                    }
+                });
+        }
+    }
+</script>
+</body>
+</html>
